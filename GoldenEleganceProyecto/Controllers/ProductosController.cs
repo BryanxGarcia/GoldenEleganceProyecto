@@ -1,77 +1,49 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using GoldenEleganceProyecto.Context;
+using GoldenEleganceProyecto.Models;
+using GoldenEleganceProyecto.Service.Services;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using GoldenEleganceProyecto.Service.IServices;
+using System.Collections.Generic;
+
+
 
 namespace GoldenEleganceProyecto.Controllers
 {
     [ApiController]
-    [Route("api/[controller]/[action]")]
-    public class ProductosController : Controller
+    [Route("api/[controller]")]
+    public class ProductosController : ControllerBase
     {
 
-        private readonly ILogger<ProductosController> _logger;
+        private readonly IUsuariosServicio _usuariosServicio;
 
-        public ProductosController(ILogger<ProductosController> logger)
+        public ProductosController( IUsuariosServicio usuariosServicio)
         {
-            _logger = logger;
+            _usuariosServicio = usuariosServicio;
         }
 
-        // GET: ProductosController/Details/5
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
-        public ActionResult Details(int id)
+        [Route("ObtenerListaUsuarios")]
+        public async Task<IActionResult> ObtenerListado()
         {
-            return View();
-        }
+            var usuarios = await _usuariosServicio.ObtenerLista();
 
-        // GET: ProductosController/Create
-        [HttpGet]
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: ProductosController/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        
-        public ActionResult Create(IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: ProductosController/Edit/5
-        [HttpGet]
-        public ActionResult Edit(int id)
-        {
-            return View();
+            return Ok(usuarios);
         }
 
         // POST: ProductosController/Edit/5
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        [Route("GuardarUsuario")]
+        public async Task<IActionResult> Guardar(Usuarios usuario)
         {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
+            var usuarios = await _usuariosServicio.CrearUsuario(usuario);
 
-        // GET: ProductosController/Delete/5
-        [HttpGet]
-        public ActionResult Delete(int id)
-        {
-            return View();
+            return Ok(usuarios);
         }
 
         // POST: ProductosController/Delete/5
