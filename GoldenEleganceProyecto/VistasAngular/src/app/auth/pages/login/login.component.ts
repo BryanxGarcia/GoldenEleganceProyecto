@@ -5,18 +5,23 @@ import { Component } from '@angular/core';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
+
+
 export class LoginComponent {
 
+  claseDiv:string= 'container';
+
+  login ={
+    // 'overlay-panel overlay-left overlay-panel overlay-right':true
+  };
+
+  fijar(){
+    this.claseDiv='container  right-panel-active';
+  }
+
+  eliminar(){
+    this.claseDiv='container';
+  }
+
+
 }
-
-// const signUpButton = document.getElementById('signUp');
-// const signInButton = document.getElementById('signIn');
-// const container = document.getElementById('container');
-
-// signUpButton?.addEventListener('click', () => {
-//     container?.classList.add("right-panel-active");
-// });
-
-// signInButton?.addEventListener('click', () => {
-//     container?.classList.remove("right-panel-active");
-// });
