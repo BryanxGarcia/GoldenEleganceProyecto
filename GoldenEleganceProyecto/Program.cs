@@ -1,11 +1,11 @@
 using GoldenEleganceProyecto.Context;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerUI;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
-
 
 // Add services to the container.
 builder.Services.AddDbContext<ApplicationDbContext>(
@@ -43,6 +43,9 @@ app.UseCors("corsapp");
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
+app.UseAuthentication();
+
+app.MapDefaultControllerRoute();
 
 app.MapControllers();
 

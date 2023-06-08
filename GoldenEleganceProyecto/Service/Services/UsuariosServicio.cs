@@ -23,7 +23,7 @@ namespace GoldenEleganceProyecto.Service.Services
             List<Usuarios> lista = new List<Usuarios>();
             try
             {
-                lista = await _context.Usuarios.ToListAsync();
+                lista = await _context.Usuario.ToListAsync();
 
             }
             catch (Exception ex)
