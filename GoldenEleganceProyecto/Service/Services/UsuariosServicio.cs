@@ -1,11 +1,13 @@
 ﻿using GoldenEleganceProyecto.Context;
 using GoldenEleganceProyecto.Models;
+using GoldenEleganceProyecto.Models.Helpers;
+using GoldenEleganceProyecto.Service.IServices;
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
 
 namespace GoldenEleganceProyecto.Service.Services
 {
-    public class UsuariosServicio
+    public class UsuariosServicio : IUsuariosServicio
     {
 
         private readonly ApplicationDbContext _context;
@@ -16,6 +18,31 @@ namespace GoldenEleganceProyecto.Service.Services
             _logger = logger;
             _context = context;
 
+        }
+
+        public Task<ResponseHelper> CrearUsuario(Usuarios vm)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<ResponseHelper> EditarUsuario(Usuarios vm)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<ResponseHelper> EliminarUsuario(int? Id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<bool> ExisteUsuario(Usuarios asignatura)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<bool> ExisteUsuarioPorId(int? Id)
+        {
+            throw new NotImplementedException();
         }
 
         public async Task<List<Usuarios>> ObtenerLista()
@@ -33,6 +60,11 @@ namespace GoldenEleganceProyecto.Service.Services
             return lista;
 
 
+        }
+
+        public Task<Usuarios> ObtenerPorId(int? Id)
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { CarritoCompraComponent } from './pages/carrito-compra/carrito-compra.component';
 import { FavoritosComponent } from './pages/favoritos/favoritos.component';
 import { HistorialComponent } from './pages/historial/historial.component';
+import { DashboardComponent } from './pages/dashboard/dashboard.component';
 
 
 const routes: Routes = [
@@ -25,6 +26,13 @@ const routes: Routes = [
     component: HistorialComponent,
     data: {
       title: 'Historial',
+    }
+  },
+  {
+    path: 'dashboard',
+    component: DashboardComponent,
+    data: {
+      title: 'Dashboard',
     }
   },
   

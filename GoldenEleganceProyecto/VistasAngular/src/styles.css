@@ -1,1 +1,9 @@
-/* You can add global styles to this file, and also import other style files */
+html {
+    box-sizing: border-box;
+    margin-inline-end: 0;
+    padding: 0;
+    margin-top: none;
+    margin-left: none;
+    margin-right: none;
+    margin-block-end: none;
+}

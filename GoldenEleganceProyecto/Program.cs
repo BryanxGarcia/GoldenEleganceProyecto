@@ -1,11 +1,28 @@
 using GoldenEleganceProyecto.Context;
+using GoldenEleganceProyecto.Service.IServices;
+using GoldenEleganceProyecto.Service.Services;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerUI;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
+//Add services
+builder.Services.AddTransient<IAuthenticationServicio, AuthenticationServicio>();
+builder.Services.AddTransient<ICategoriasServicio, CategoriasServicio>();
+builder.Services.AddTransient<IProductosServicio, ProductosServicio>();
+builder.Services.AddTransient<IRolesServicio, RolesServicio>();
+builder.Services.AddTransient<IUsuariosServicio, UsuariosServicio>();
+builder.Services.AddTransient<IVentasServicio, VentasServicio>();
+builder.Services.AddTransient <IEmailService, EmailServicio>();
+
+
+
 
 // Add services to the container.
 builder.Services.AddDbContext<ApplicationDbContext>(
@@ -14,14 +31,39 @@ builder.Services.AddDbContext<ApplicationDbContext>(
         options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
     });
 
+builder.Services.AddAuthentication(x =>
+{
+    x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+}).AddJwtBearer(x =>
+{
+    x.RequireHttpsMetadata = false;
+    x.SaveToken = true;
+    x.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuerSigningKey = true,
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("muchosecrete.....")),
+        ValidateAudience = false,
+        ValidateIssuer = false, 
+        ClockSkew = TimeSpan.Zero
+
+    };
+});
+
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 
-builder.Services.AddCors(p => p.AddPolicy("corsapp", builder =>
+builder.Services.AddCors(option =>
 {
-    builder.WithOrigins("*").AllowAnyMethod().AllowAnyHeader();
-}));
+    option.AddPolicy("MyPolicy", builder =>
+    {
+        builder.AllowAnyOrigin()
+        .AllowAnyMethod()
+        .AllowAnyHeader();
+
+    });
+});
 
 builder.Services.AddSwaggerGen(c =>
 {
@@ -38,7 +80,7 @@ if (app.Environment.IsDevelopment())
 app.UseSwaggerUI(c =>c.SwaggerEndpoint("/swagger/v1/swagger.json", "ServiciosAPI v1")
  );
 app.UseRouting();
-app.UseCors("corsapp");
+app.UseCors("MyPolicy");
 
 app.UseHttpsRedirection();
 

@@ -128,6 +128,9 @@ namespace GoldenEleganceProyecto.Migrations
                     b.Property<string>("Direccion")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("EmailConfirmed")
+                        .HasColumnType("bit");
+
                     b.Property<int>("FKRol")
                         .HasColumnType("int");
 

@@ -8,6 +8,8 @@ import { FichaProductoComponent } from './pages/ficha-producto/ficha-producto.co
 import { HistorialComponent } from './pages/historial/historial.component';
 import { InicioComponent } from './pages/inicio/inicio.component';
 import { PerfilUsuarioComponent } from './pages/perfil-usuario/perfil-usuario.component';
+import { DashboardComponent } from './pages/dashboard/dashboard.component';
+import { NadvarUserComponent } from '../shared/components/nadvar-user/nadvar-user.component';
 // import { SharedModule } from '../shared/shared.module';
 // import { NgxCaptchaModule } from 'ngx-captcha';
 
@@ -18,7 +20,9 @@ import { PerfilUsuarioComponent } from './pages/perfil-usuario/perfil-usuario.co
     FichaProductoComponent,
     HistorialComponent, 
     InicioComponent,
-    PerfilUsuarioComponent
+    PerfilUsuarioComponent,
+    DashboardComponent,
+    NadvarUserComponent
   ],
   imports: [
     CommonModule,

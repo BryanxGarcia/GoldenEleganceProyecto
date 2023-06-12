@@ -22,6 +22,6 @@ namespace GoldenEleganceProyecto.Models
         public int FKRol { get; set; }
         public Rol Roles { get; set; }
         public bool IsDeleted { get; set; }
-        public DateTime? RowVersion { get; set; }
+        public DateTime RowVersion { get; set; }
     }
 }

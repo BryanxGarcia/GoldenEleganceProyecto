@@ -17,6 +17,9 @@ namespace GoldenEleganceProyecto.Controllers
             _authenticationServicio = authenticationServicio;
         }
 
+
+        //ryvbgumgqigdjogr
+
         /// <summary>
         /// 
         /// </summary>
@@ -29,9 +32,20 @@ namespace GoldenEleganceProyecto.Controllers
                 return BadRequest();
 
             var responseHelper = await _authenticationServicio.LoginUsuario(usuario);
+            if(responseHelper.Success == false)
+            {
+                BadRequest(responseHelper);
+            }
 
-            return Ok(responseHelper);
+            return Ok(new
+            {
+                Success = true,
+                Token = responseHelper.HelperData,
+                Message ="Login Succes"
+            });
         }
+
+
 
         /// <summary>
         /// 

@@ -4,6 +4,7 @@ import { LoginComponent } from './pages/login/login.component';
 import { ResetPasswordComponent } from './pages/reset-password/reset-password.component';
 import { ContactanosComponent } from './pages/contactanos/contactanos.component';
 import { InicioComponent } from '../base-admin/pages/inicio/inicio.component';
+import { PagInicialComponent } from './pages/pag-inicial/pag-inicial.component';
 
 const routes: Routes = [
   {
@@ -14,7 +15,7 @@ const routes: Routes = [
     }
   },
   {
-    path: 'contacto',
+    path: 'contactanos',
     component: ContactanosComponent,
     data: {
       title: 'Contactanos',
@@ -22,7 +23,7 @@ const routes: Routes = [
   },
   {
     path: 'inicio',
-    component: InicioComponent,
+    component: PagInicialComponent,
     data: {
       title: 'Golden Elegance',
     }
@@ -37,7 +38,7 @@ const routes: Routes = [
   
   {
     path: '**',
-    redirectTo: 'inicio'
+    redirectTo: 'login'
   }
 ];
 
